@@ -8,67 +8,45 @@
   <body>
     <canvas id="canvas" width="500" height="500"></canvas>
 
-    <script src="poo.js"></script>
-    <script src="anim.js"></script>
-
+    <script src="teclado.js"></script>
     <script>
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
-      
-      const anim = new Anim(ctx);
-      
 
-      const p1 = new Persona(ctx);
-      p1.x = 0;
-      p1.y = 200;
-      p1.speedX = 10;
-      p1.speedY = 15;
+      let posX = 0;
+      let posY = 0;
 
+      draw();
 
-      
+      const teclado = new Teclado(document);
 
-      //   const bola = {
-      //     x: 20,
-      //     y: 120,
-      //     raio: 5,
-      //   };
+      requestAnimationFrame(anim());
 
-      //   let initialTime = new Date().getTime();
+      function anim() {
+        if (teclado.isPressed(37)) {
+          posX -= 10;
+        }
 
-      //   function move() {
-      //     requestAnimationFrame(move);
+        if (teclado.isPressed(38)) {
+          posY -= 10;
+        }
 
-      //     let now = new Date().getTime();
+        if (teclado.isPressed(39)) {
+          posX += 10;
+        }
 
-      //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (teclado.isPressed(40)) {
+          posY += 10;
+        }
 
-      //     ctx.beginPath();
-      //     ctx.arc(bola.x, bola.y, bola.raio, 0, Math.PI * 2);
-      //     ctx.fill();
+        requestAnimationFrame(anim);
+        draw();
+      }
 
-      //     let velocidade = 3;
-
-      //     bola.x += velocidade + (now - initialTime) / 1000;
-
-      //     initialTime = now;
-      //   }
-      //   requestAnimationFrame(move());
-
-      //   const img = new Image();
-      //   img.src = "assets/img/sagat-street-fighter-2.gif";
-
-      //   img.onload = () => {
-      //     let x = 0;
-
-      //     for (let i = 0; i < 5; i++) {
-      //       ctx.fillStyle = "#f40000";
-      //       ctx.fillRect(x, 20, 94, 130);
-
-      //       ctx.drawImage(img, x, 20, 94, 130);
-
-      //       x += 94;
-      //     }
-      //   };
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(posX, posY, 50, 50);
+      }
     </script>
   </body>
 </html>

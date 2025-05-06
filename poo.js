@@ -1,31 +1,38 @@
-function Persona(name, sprite, x, y, speedX, speedY, ctx) {
-  this.name = name;
-  this.sprite = sprite;
-  this.x = x;
-  this.y = y;
-  this.speedX = speedX;
-  this.speedY = speedY;
-  this.ctx = ctx;
+function Bola(context) {
+  this.context = context;
+  this.x = 0;
+  this.y = 0;
+  this.velocidadeX = 0;
+  this.velocidadeY = 0;
 
-  this.spriteWidth = 94;
-  this.spriteHeight = 130;
-  this.wins = 0;
+  this.cor = "black";
+  this.raio = 10;
 }
 
-Persona.prototype = {
-  victory: function () {
-    this.wins++;
-  },
-  update: () => {
-    if (this.x < this.spriteWidth || this.x > (this.ctx.canvas.width - this.spriteWidth)) {
-      this.speedX *= -1;
-    }
-    if (this.y < this.spriteHeight || this.y > (this.ctx.canvas.height - this.spriteHeight)) {
-      this.speedY *= -1;
-    }
-  },
-  draw: () => {
-    
-  }
-};
+Bola.prototype = {
+  update: function () {
+    const ctx = this.context;
 
+    if (this.x < this.raio || this.x > ctx.canvas.width - this.raio)
+      this.velocidadeX *= -1;
+
+    if (this.y < this.raio || this.y > ctx.canvas.height - this.raio)
+      this.velocidadeY *= -1;
+
+    this.x += this.velocidadeX;
+    this.y += this.velocidadeY;
+  },
+  draw: function () {
+    const ctx = this.context;
+
+    ctx.save();
+
+    ctx.fillStyle = this.cor;
+
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.raio, 0, 2 * Math.PI, false);
+    ctx.fill();
+
+    ctx.restore();
+  },
+};

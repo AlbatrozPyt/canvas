@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+    <script src="poo.js"></script>
+    <script src="anim.js"></script>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      
+      const anim = new Anim(ctx);
+      
+
+      const p1 = new Persona(ctx);
+      p1.x = 0;
+      p1.y = 200;
+      p1.speedX = 10;
+      p1.speedY = 15;
+
+
+      
+
+      //   const bola = {
+      //     x: 20,
+      //     y: 120,
+      //     raio: 5,
+      //   };
+
+      //   let initialTime = new Date().getTime();
+
+      //   function move() {
+      //     requestAnimationFrame(move);
+
+      //     let now = new Date().getTime();
+
+      //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      //     ctx.beginPath();
+      //     ctx.arc(bola.x, bola.y, bola.raio, 0, Math.PI * 2);
+      //     ctx.fill();
+
+      //     let velocidade = 3;
+
+      //     bola.x += velocidade + (now - initialTime) / 1000;
+
+      //     initialTime = now;
+      //   }
+      //   requestAnimationFrame(move());
+
+      //   const img = new Image();
+      //   img.src = "assets/img/sagat-street-fighter-2.gif";
+
+      //   img.onload = () => {
+      //     let x = 0;
+
+      //     for (let i = 0; i < 5; i++) {
+      //       ctx.fillStyle = "#f40000";
+      //       ctx.fillRect(x, 20, 94, 130);
+
+      //       ctx.drawImage(img, x, 20, 94, 130);
+
+      //       x += 94;
+      //     }
+      //   };
+    </script>
+  </body>
+</html>

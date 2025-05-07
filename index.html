@@ -6,47 +6,103 @@
     <title>canvas</title>
   </head>
   <body>
-    <canvas id="canvas" width="500" height="500"></canvas>
+    <canvas id="canvas" width="1000" height="1000"></canvas>
 
+    <!-- <script src="heroi.js"></script> -->
+    <!-- <script src="sonic.js"></script> -->
     <script src="teclado.js"></script>
+    <script src="anim.js"></script>
+    <script src="poo.js"></script>
+    <script src="spritesheet.js"></script>
+    <script src="colisor.js"></script>
     <script>
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
 
-      let posX = 0;
-      let posY = 0;
+      const b1 = new Bola(ctx);
+      b1.x = 100;
+      b1.y = 20;
+      b1.velocidadeX = 10;
+      b1.velocidadeY = -5;
+      b1.cor = 'blue';
+      b1.raio = 20;
+      
+      const b2 = new Bola(ctx);
+      b2.x = 180;
+      b2.y = 390;
+      b2.velocidadeX = -5;
+      b2.velocidadeY = 10;
+      b2.cor = 'red';
+      b2.raio = 30;
 
-      draw();
+      const colisor = new Colisor();
+      colisor.newSprite(b1);
+      colisor.newSprite(b2);
 
-      const teclado = new Teclado(document);
+      requestAnimationFrame(animar);
 
-      requestAnimationFrame(anim());
-
-      function anim() {
-        if (teclado.isPressed(37)) {
-          posX -= 10;
-        }
-
-        if (teclado.isPressed(38)) {
-          posY -= 10;
-        }
-
-        if (teclado.isPressed(39)) {
-          posX += 10;
-        }
-
-        if (teclado.isPressed(40)) {
-          posY += 10;
-        }
-
-        requestAnimationFrame(anim);
-        draw();
-      }
-
-      function draw() {
+      function animar() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillRect(posX, posY, 50, 50);
+
+        b1.update();
+        b2.update();
+        
+        b1.draw();
+        b2.draw();
+
+        colisor.process();
+
+        requestAnimationFrame(animar);
       }
+
+      
+      // const animation = new Anim(ctx);
+      // const teclado = new Teclado(document);
+
+      // const img = new Image();
+      // img.src = 'assets/img/spritesheet.png'
+
+      // const sonic = new Sonic(ctx, teclado, img);
+      // sonic.x = 100;
+      // sonic.y = 100;
+      
+      // animation.newSprite(sonic);
+
+      // img.onload = function() {
+      //   animation.turnOn();
+      // }
+
+
+
+      // const sheet = new Spritesheet(ctx, img, 9, 15);
+      // sheet.intervalo = 60;
+      // sheet.linha = 2;
+
+      // img.onload = gameLoop;
+
+      // function gameLoop() {
+      //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+      //   sheet.nextFrame();
+      //   sheet.draw(0, 0);
+
+      //   requestAnimationFrame(gameLoop);
+      // }
+
+
+
+
+      // const heroi = new Heroi(ctx, teclado, animation);
+
+      // heroi.x = 0;
+      // heroi.x = 0;
+      // animation.newSprite(heroi);
+
+      // teclado.shottFunction(32, function() {
+      //   heroi.shott();
+      // })
+
+      // animation.turnOn();
     </script>
   </body>
 </html>
